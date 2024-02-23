@@ -1,5 +1,5 @@
 # ebpf
-thanks for
+thanks to:
 - Liz Rice
-- Isovalent
 - Gregg Brendan 
+- Isovalent

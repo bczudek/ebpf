@@ -18,8 +18,9 @@ cd bpftool/src
 make install 
 
 wget https://github.com/bpftrace/bpftrace/releases/download/v0.20.1/bpftrace
-chmod +x bpftracee
 mv bpftrace /usr/bin/bpftrace
+chmod +x /usr/bin/bpftrace
 
 apt update
 apt install -y clang
+chmod +x demos/demo1/hello.py
