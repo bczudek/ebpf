@@ -1,4 +1,4 @@
-TARGETS = hello hello-func
+TARGETS = hello
 
 all: $(TARGETS)
 .PHONY: all
@@ -15,4 +15,3 @@ $(TARGETS): %: %.bpf.o
 clean:
 		- rm *.bpf.o
 		- rm -f /sys/fs/bpf/hello
-		- rm -f /sys/fs/bpf/hello-func
