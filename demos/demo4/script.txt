@@ -1,0 +1,15 @@
+bpftool prog list
+instalacja falco
+
+podjerzane zdarzenie
+sudo cat /etc/shadow > /dev/null
+sudo journalctl _COMM=falco -p warning
+
+czy eBPF był użyty przez falco?
+strace –c /etc/shadow > /dev/null
+https://github.com/falcosecurity/rules/blob/main/rules/falco_rules.yaml#L407 – show the rule
+list sensitive_file_names,
+macro: sensitive_files
+rule: Read sensitive file untrusted (397)
+https://github.com/falcosecurity/libs/blob/master/driver/modern_bpf/programs/tail_called/events/syscall_dispatched_events/read.bpf.c – show the ebpf
+https://learning.oreilly.com/library/view/practical-cloud-native/9781098118563/ch03.html#falco_and_the_falco_libraries_a_data_fl
