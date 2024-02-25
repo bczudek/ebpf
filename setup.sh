@@ -23,4 +23,4 @@ chmod +x /usr/bin/bpftrace
 
 apt update
 apt install -y clang
-chmod +x demos/demo1/hello.py
+chmod +x /root/ebpf/demos/demo1/hello.py

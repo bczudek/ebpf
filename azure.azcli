@@ -1,0 +1,58 @@
+#!/bin/bash
+
+# Login to Azure
+az login
+
+# Set the subscription
+az account set --subscription c5923f71-386f-4b3e-aebd-168e08bf6ab3
+
+#variables
+location="Poland Central"
+rgname="rg-demo"
+vnetname="vnet-demo"
+snetname="default"
+password=""
+
+# Create a resource group
+az group create --name $rgname --location $location
+
+# Create a virtual network
+az network vnet create --resource-group $rgname \
+  --name $vnetname --location $location \
+  --address-prefix 10.0.0.0/16 \
+  --subnet-name default \
+  --subnet-prefixes 10.0.0.0/24
+
+# Create the first virtual machine
+az vm create \
+  --location $location \
+  --resource-group $rgname \
+  --name vmdemo123 \
+  --image Ubuntu2204 \
+  --admin-username demo123 \
+  --admin-password $password \
+  --size Standard_B2ms \
+  --vnet-name $vnetname \
+  --subnet $snetname \
+  --nsg-rule SSH \
+  --no-wait
+
+# Create the second virtual machine
+az vm create \
+  --location $location \
+  --resource-group $rgname \
+  --name vmdemo4 \
+  --image Ubuntu2204 \
+  --admin-username falco \
+  --admin-password $password \
+  --size Standard_B2ms \
+  --nsg-rule SSH \
+  --subnet $snetname \
+  --vnet-name $vnetname 
+
+echo "ssh demo123@"$(az vm show --resource-group $rgname --name vmdemo123 --show-details --query publicIps --output tsv)
+echo "ssh falco@"$(az vm show --resource-group $rgname --name vmdemo4 --show-details --query publicIps --output tsv)
+
+
+
+git clone https://github.com/bczudek/ebpf.git
