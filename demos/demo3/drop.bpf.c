@@ -4,8 +4,8 @@
 int counter = 0;
 
 SEC("xdp")
-int hello(struct xdp_md *ctx) {
-    bpf_printk("Hello World %d", counter);
+int drop(struct xdp_md *ctx) {
+    bpf_printk("Dropping packet %d", counter);
     counter++;
     return XDP_DROP;
 }

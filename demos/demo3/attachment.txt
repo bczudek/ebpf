@@ -1,10 +1,10 @@
-bpftool prog load hello.bpf.o /sys/fs/bpf/hello
-bpftool net attach xdp name hello dev lo
+bpftool prog load drop.bpf.o /sys/fs/bpf/drop
+bpftool net attach xdp name drop dev lo
 
 bpftool net list
 ip a show dev lo
 
 bpftool prog trace log
 
-bpftool net detach xdp  dev lo
-rm /sys/fs/bpf/hello
+bpftool net detach xdp dev lo
+rm /sys/fs/bpf/drop
