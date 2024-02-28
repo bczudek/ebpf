@@ -7,11 +7,14 @@ az login
 az account set --subscription c5923f71-386f-4b3e-aebd-168e08bf6ab3
 
 #variables
+postfix=""
 location="Poland Central"
-rgname="rg-demo"
-vnetname="vnet-demo"
+rgname="rg-demo"$postfix
+vnetname="vnet-demo"$postfix
 snetname="default"
 password=""
+vm1="vmdemo123"$postfix
+vm2="vmdemo4"$postfix
 
 # Create a resource group
 az group create --name $rgname --location $location
@@ -27,7 +30,7 @@ az network vnet create --resource-group $rgname \
 az vm create \
   --location $location \
   --resource-group $rgname \
-  --name vmdemo123 \
+  --name $vm1 \
   --image Ubuntu2204 \
   --admin-username demo123 \
   --admin-password $password \
@@ -41,7 +44,7 @@ az vm create \
 az vm create \
   --location $location \
   --resource-group $rgname \
-  --name vmdemo4 \
+  --name $vm2 \
   --image Ubuntu2204 \
   --admin-username falco \
   --admin-password $password \
@@ -50,9 +53,6 @@ az vm create \
   --subnet $snetname \
   --vnet-name $vnetname 
 
-echo "ssh demo123@"$(az vm show --resource-group $rgname --name vmdemo123 --show-details --query publicIps --output tsv)
-echo "ssh falco@"$(az vm show --resource-group $rgname --name vmdemo4 --show-details --query publicIps --output tsv)
-
-
-
-git clone https://github.com/bczudek/ebpf.git
+echo "ssh demo123@"$(az vm show --resource-group $rgname --name $vm1 --show-details --query publicIps --output tsv)
+echo "ssh falco@"$(az vm show --resource-group $rgname --name $vm2 --show-details --query publicIps --output tsv)
+echo "git clone https://github.com/bczudek/ebpf.git"
