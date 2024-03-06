@@ -1,10 +1,4 @@
-#!/bin/bash
-
-# Login to Azure
-az login
-
-# Set the subscription
-az account set --subscription c5923f71-386f-4b3e-aebd-168e08bf6ab3
+#Create two virtual machines in Azure
 
 #variables
 postfix=""
@@ -15,6 +9,13 @@ snetname="default"
 password=""
 vm1="vmdemo123"$postfix
 vm2="vmdemo4"$postfix
+subscription=""
+
+# Login to Azure
+az login
+
+# Set the subscription
+az account set --subscription $subscription
 
 # Create a resource group
 az group create --name $rgname --location $location
@@ -55,4 +56,3 @@ az vm create \
 
 echo "ssh demo123@"$(az vm show --resource-group $rgname --name $vm1 --show-details --query publicIps --output tsv)
 echo "ssh falco@"$(az vm show --resource-group $rgname --name $vm2 --show-details --query publicIps --output tsv)
-echo "git clone https://github.com/bczudek/ebpf.git"

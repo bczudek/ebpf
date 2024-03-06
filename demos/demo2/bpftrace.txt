@@ -3,4 +3,3 @@ bpftrace -e 'tracepoint:syscalls:sys_enter_openat /comm == "cat"/ { printf("%s %
 
 bpftrace -l | wc -l
 bpftrace -l "*tracepoint:*" | wc -l
-comm	Process or command name
