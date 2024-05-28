@@ -7,6 +7,8 @@ sudo journalctl _COMM=falco -p warning
 
 czy eBPF był użyty przez falco?
 strace –c /etc/shadow > /dev/null
+cat /etc/shadow > /dev/null
+journalctl _COMM=falco -p warning
 https://github.com/falcosecurity/rules/blob/main/rules/falco_rules.yaml#L407 – show the rule
 list sensitive_file_names,
 macro: sensitive_files
